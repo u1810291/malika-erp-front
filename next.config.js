@@ -16,4 +16,16 @@ const nextConfig = withTM({
   reactStrictMode: true
 });
 
-module.exports = nextConfig;
+const runtimeCaching = require('next-pwa/cache')
+
+
+const withPWA = require("next-pwa")({
+  dest: 'public', 
+  register: true,
+  skipWaiting: true,
+  runtimeCaching,
+  disableDevLogs: true
+});
+
+module.exports = withPWA(nextConfig);
+

@@ -12,7 +12,7 @@ import { Box } from '@mui/material';
 const Page = forwardRef(({ children, title = '', meta, ...other }, ref) => (
   <>
     <Head>
-      <title>{`${title} | Berry - React Material Admin Dashboard Template`}</title>
+      <title>{`${title}`}</title>
       {meta}
     </Head>
     <Box ref={ref} {...other}>
