@@ -1,19 +1,21 @@
 // material-ui
 import { styled } from '@mui/material/styles';
+import dynamic from 'next/dynamic';
 
 // project imports
 import LAYOUT from 'constant';
 import Layout from 'layout';
-import Page from 'components/ui-component/Page';
-import Header from 'components/landingpage/Header';
-import Feature from 'components/landingpage/Feature';
-import Demos from 'components/landingpage/Demos';
-import Layouts from 'components/landingpage/Layouts';
-import KeyFeature from 'components/landingpage/KeyFeature';
-import Subscribe from 'components/landingpage/Subscribe';
-import Footer from 'components/landingpage/Footer';
-import Customization from 'layout/Customization';
-import AppBar from 'components/ui-component/extended/AppBar';
+
+const Header = dynamic(() => import('components/landingpage/Header'));
+const Feature = dynamic(() => import('components/landingpage/Feature'));
+const Demos = dynamic(() => import('components/landingpage/Demos'));
+const Layouts = dynamic(() => import('components/landingpage/Layouts'));
+const KeyFeature = dynamic(() => import('components/landingpage/KeyFeature'));
+const Subscribe = dynamic(() => import('components/landingpage/Subscribe'));
+const Footer = dynamic(() => import('components/landingpage/Footer'));
+const Customization = dynamic(() => import('layout/Customization'));
+const AppBar = dynamic(() => import('components/ui-component/extended/AppBar'));
+const Page = dynamic(() => import('components/ui-component/Page'));
 
 const HeaderWrapper = styled('div')(({ theme }) => ({
   paddingTop: 30,

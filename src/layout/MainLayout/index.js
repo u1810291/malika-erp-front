@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
+import { useRouter } from 'next/router';
 
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
@@ -18,6 +19,7 @@ import { useDispatch, useSelector } from 'store';
 import AuthGuard from 'utils/route-guard/AuthGuard';
 // assets
 import { IconChevronRight } from '@tabler/icons';
+import ProtectedSidebar from './ProtectedSidebar';
 
 // styles
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
@@ -69,6 +71,7 @@ const MainLayout = ({ children }) => {
   const theme = useTheme();
   const matchDownMd = useMediaQuery(theme.breakpoints.down('lg'));
 
+  const router = useRouter()
   const dispatch = useDispatch();
   const { drawerOpen } = useSelector((state) => state.menu);
   const { container } = useConfig();
@@ -106,7 +109,7 @@ const MainLayout = ({ children }) => {
         </AppBar>
 
         {/* drawer */}
-        <Sidebar />
+        {router.asPath === 'default' ? <Sidebar /> : <ProtectedSidebar /> }
 
         {/* main content */}
         <Main theme={theme} open={drawerOpen}>
