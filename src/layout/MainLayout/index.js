@@ -71,7 +71,8 @@ const MainLayout = ({ children }) => {
   const theme = useTheme();
   const matchDownMd = useMediaQuery(theme.breakpoints.down('lg'));
 
-  const router = useRouter()
+  const router = useRouter();
+  const path = router.asPath.split('/')
   const dispatch = useDispatch();
   const { drawerOpen } = useSelector((state) => state.menu);
   const { container } = useConfig();
@@ -109,7 +110,7 @@ const MainLayout = ({ children }) => {
         </AppBar>
 
         {/* drawer */}
-        {router.asPath === 'default' ? <Sidebar /> : <ProtectedSidebar /> }
+        {path[path.length - 1] === 'default' ? <Sidebar /> : <ProtectedSidebar /> }
 
         {/* main content */}
         <Main theme={theme} open={drawerOpen}>
