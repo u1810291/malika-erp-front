@@ -7,7 +7,9 @@ import { Typography } from '@mui/material';
 import NavGroup from './NavGroup';
 import NavItem from './NavItem';
 import NavCollapse from './NavCollapse';
-import protectedMenuItems from 'protected-menu-items';
+// import protectedMenuItems from 'protected-menu-items';
+import protectedMenuItems from 'menu-items';
+
 
 // ==============================|| SIDEBAR MENU LIST ||============================== //
 
