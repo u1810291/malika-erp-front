@@ -42,6 +42,7 @@ import FileCopyIcon from '@mui/icons-material/FileCopyTwoTone';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/AddTwoTone';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
+import { useRouter } from 'next/router';
 
 // table sort
 function descendingComparator(a, b, orderBy) {
@@ -221,6 +222,7 @@ const ProductList = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
 
+  const router = useRouter()
   // show a right sidebar when clicked on new product
   const [open, setOpen] = React.useState(false);
   const handleClickOpenDialog = () => {
@@ -290,21 +292,24 @@ const ProductList = () => {
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
+  const handleClick = (event, id) => {
 
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
-    }
+    console.log(id)
+    router.push(`order/${id}`)
+    // const selectedIndex = selected.indexOf(name);
+    // let newSelected = [];
 
-    setSelected(newSelected);
+    // if (selectedIndex === -1) {
+    //   newSelected = newSelected.concat(selected, name);
+    // } else if (selectedIndex === 0) {
+    //   newSelected = newSelected.concat(selected.slice(1));
+    // } else if (selectedIndex === selected.length - 1) {
+    //   newSelected = newSelected.concat(selected.slice(0, -1));
+    // } else if (selectedIndex > 0) {
+    //   newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
+    // }
+
+    // setSelected(newSelected);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -395,14 +400,21 @@ const ProductList = () => {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow hover role="checkbox" aria-checked={isItemSelected} tabIndex={-1} key={index} selected={isItemSelected}>
-                      <TableCell padding="checkbox" sx={{ pl: 3 }} onClick={(event) => handleClick(event, row.name)}>
+                    <TableRow
+                      hover
+                      aria-checked={isItemSelected}
+                      tabIndex={-1}
+                      key={index}
+                      selected={isItemSelected}
+                      onClick={(event) => handleClick(event, row.id)}>
+                      <TableCell padding="checkbox" sx={{ pl: 3 }}>
                         <Checkbox
                           color="primary"
                           checked={isItemSelected}
                           inputProps={{
                             'aria-labelledby': labelId
                           }}
+                          onClick={(event) => console.warn(event, row.id)}
                         />
                       </TableCell>
                       <TableCell
@@ -410,7 +422,6 @@ const ProductList = () => {
                         component="th"
                         id={labelId}
                         scope="row"
-                        onClick={(event) => handleClick(event, row.name)}
                         sx={{ cursor: 'pointer' }}
                       >
                         <Typography variant="subtitle1" sx={{ color: theme.palette.mode === 'dark' ? 'grey.600' : 'grey.900' }}>
@@ -422,7 +433,6 @@ const ProductList = () => {
                         component="th"
                         id={labelId}
                         scope="row"
-                        onClick={(event) => handleClick(event, row.name)}
                         sx={{ cursor: 'pointer' }}
                       >
                         <Typography variant="subtitle1" sx={{ color: theme.palette.mode === 'dark' ? 'grey.600' : 'grey.900' }}>

@@ -168,7 +168,7 @@ const application = {
           id: 'order-details',
           title: <FormattedMessage id="order-details" />,
           type: 'item',
-          url: '/app/customer/order-details'
+          url: '/app/customer/order/{id}'
         },
         {
           id: 'product',
